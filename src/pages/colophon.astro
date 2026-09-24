@@ -1,0 +1,168 @@
+---
+import "../styles/global.css";
+import DotGrid from "../components/DotGrid.astro";
+import HighlightSelection from "../components/HighlightSelection.astro";
+---
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+        <meta name="generator" content={Astro.generator} />
+        <title>Colophon — !localhost</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Single+Day&display=swap"
+        />
+    </head>
+    <body>
+        <DotGrid>
+            <main class="mx-auto max-w-2xl px-6 py-16">
+                <h1
+                    class="text-5xl"
+                    style="font-family: 'Single Day', cursive;"
+                >
+                    Colophon
+                </h1>
+                <p class="mt-1 text-sm text-gray-600">
+                    How this site is built, and who it borrows from.
+                </p>
+
+                <section class="mt-12">
+                    <h2 class="text-sm font-semibold uppercase tracking-wide text-gray-500">
+                        Stack
+                    </h2>
+                    <ul class="mt-3 space-y-1 text-gray-800">
+                        <li>
+                            <a
+                                class="underline underline-offset-2 hover:no-underline"
+                                href="https://astro.build"
+                                target="_blank"
+                            >
+                                Astro
+                            </a>{" "}
+                            — static site framework
+                        </li>
+                        <li>
+                            <a
+                                class="underline underline-offset-2 hover:no-underline"
+                                href="https://tailwindcss.com"
+                                target="_blank"
+                            >
+                                Tailwind CSS
+                            </a>{" "}
+                            — styling
+                        </li>
+                        <li>
+                            <a
+                                class="underline underline-offset-2 hover:no-underline"
+                                href="https://vercel.com"
+                                target="_blank"
+                            >
+                                Vercel
+                            </a>{" "}
+                            — hosting and deploys
+                        </li>
+                    </ul>
+                </section>
+
+                <section class="mt-12">
+                    <h2 class="text-sm font-semibold uppercase tracking-wide text-gray-500">
+                        Typography
+                    </h2>
+                    <ul class="mt-3 space-y-1 text-gray-800">
+                        <li>
+                            <a
+                                class="underline underline-offset-2 hover:no-underline"
+                                href="https://fonts.google.com/specimen/Homemade+Apple"
+                                target="_blank"
+                            >
+                                Homemade Apple
+                            </a>{" "}
+                            (Google Fonts) — sticky note text
+                        </li>
+                        <li>
+                            <a
+                                class="underline underline-offset-2 hover:no-underline"
+                                href="https://fonts.google.com/specimen/Single+Day"
+                                target="_blank"
+                            >
+                                Single Day
+                            </a>{" "}
+                            (Google Fonts) — this page's heading
+                        </li>
+                    </ul>
+                </section>
+
+                <section class="mt-12">
+                    <h2 class="text-sm font-semibold uppercase tracking-wide text-gray-500">
+                        Credits
+                    </h2>
+                    <ul class="mt-3 space-y-1 text-gray-800">
+                        <li>
+                            Post-it note component, adapted from a{" "}
+                            <a
+                                class="underline underline-offset-2 hover:no-underline"
+                                href="https://codepen.io/jweden/pen/kGBBpM"
+                                target="_blank"
+                            >
+                                CodePen by jweden
+                            </a>
+                            .
+                        </li>
+                    </ul>
+
+                    <ul class="mt-3 space-y-1 text-gray-800">
+                        <li>
+                            <a
+                                class="underline underline-offset-2 hover:no-underline"
+                                href="https://claude.com/claude-code"
+                                target="_blank"
+                            >
+                                Claude Code
+                            </a>{" "}
+                            and{" "}
+                            <a
+                                class="underline underline-offset-2 hover:no-underline"
+                                href="https://openai.com/codex/"
+                                target="_blank"
+                            >
+                                ChatGPT Codex
+                            </a>{" "}
+                            have assisted in the development of this site.
+                        </li>
+                    </ul>
+                </section>
+
+                <section class="mt-12">
+                    <h2 class="text-sm font-semibold uppercase tracking-wide text-gray-500">
+                        About
+                    </h2>
+                    <p class="mt-3 text-gray-800">
+                        This repo documents the contents of the 3-week course
+                        "!localhost", facilitated by{" "}
+                        <a
+                            class="underline underline-offset-2 hover:no-underline"
+                            href="https://arccc.co"
+                            target="_blank"
+                        >
+                            Arko
+                        </a>{" "}
+                        and Paul at{" "}
+                        <a
+                            class="underline underline-offset-2 hover:no-underline"
+                            href="https://srishtimanipalinstitute.in/"
+                            target="_blank"
+                        >
+                            SMI
+                        </a>
+                        , during Sept–Oct 2026.
+                    </p>
+                </section>
+            </main>
+        </DotGrid>
+        <HighlightSelection />
+    </body>
+</html>
