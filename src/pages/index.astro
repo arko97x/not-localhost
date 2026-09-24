@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import DotGrid from "../components/DotGrid.astro";
+import PostIt from "../components/PostIt.astro";
 ---
 
 <html lang="en">
@@ -9,8 +10,29 @@ import DotGrid from "../components/DotGrid.astro";
         <meta name="viewport" content="width=device-width" />
         <meta name="generator" content={Astro.generator} />
         <title>!localhost (SMI 2026)</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Homemade+Apple&display=swap"
+        />
     </head>
     <body>
-        <DotGrid />
+        <DotGrid>
+            <div class="flex h-full flex-col items-center justify-center gap-8 sm:flex-row sm:gap-12">
+                <PostIt rotate={-6}>
+                    <h1>Sticky note</h1>
+                    <ul>
+                        <li>Typical colour</li>
+                    </ul>
+                </PostIt>
+                <PostIt color="blue" rotate={4}>
+                    <h1>Another sticky note</h1>
+                    <ul>
+                        <li>But, in blue</li>
+                    </ul>
+                </PostIt>
+            </div>
+        </DotGrid>
     </body>
 </html>

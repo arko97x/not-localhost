@@ -1,0 +1,70 @@
+---
+// Static post-it note, ported from https://codepen.io/jweden/pen/kGBBpM
+// without the contenteditable and click-to-cross-out behavior.
+const colors = {
+    yellow: "#ffa",
+    blue: "#b3e5fc",
+};
+
+interface Props {
+    color?: keyof typeof colors;
+    rotate?: number;
+    class?: string;
+}
+
+const { color = "yellow", rotate = 0, class: className } = Astro.props;
+---
+
+<div
+    class:list={["post-it", className]}
+    style={`--paper: ${colors[color]}; --rotate: ${rotate}deg`}
+>
+    <slot />
+</div>
+
+<style>
+    .post-it {
+        width: clamp(190px, 62vw, 250px);
+        min-height: clamp(170px, 58vw, 240px);
+        position: relative;
+        background: var(--paper);
+        transform: rotate(var(--rotate));
+        overflow: hidden;
+        padding: clamp(18px, 5.5vw, 26px);
+        /* Asymmetric radius curls the bottom-left corner. */
+        border-radius: 0 0 0 30px / 45px;
+        /* Faint glue strip up top, a soft lift toward the bottom edge. */
+        box-shadow:
+            inset 0 -30px 40px rgba(0, 0, 0, 0.07),
+            inset 0 12px 8px rgba(0, 0, 0, 0.05),
+            0 1px 2px rgba(0, 0, 0, 0.12),
+            0 8px 10px -6px rgba(0, 0, 0, 0.2);
+        font-family: "Homemade Apple", cursive;
+        line-height: 1.7em;
+        font-size: clamp(14px, 4.2vw, 19px);
+        color: #130d6b;
+    }
+
+    /* The lifted corner flap. */
+    .post-it::before {
+        content: "";
+        display: block;
+        position: absolute;
+        width: 20px;
+        height: 25px;
+        background: var(--paper);
+        box-shadow:
+            2px -1px 4px rgba(0, 0, 0, 0.12),
+            inset 15px -15px 15px rgba(0, 0, 0, 0.15);
+        left: 0;
+        bottom: 0;
+        z-index: 2;
+        transform: skewX(25deg);
+    }
+
+    /* Slotted content isn't scoped, so target it with :global. */
+    .post-it :global(h1) {
+        font-size: clamp(17px, 5.5vw, 25px);
+        position: relative;
+    }
+</style>
