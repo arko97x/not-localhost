@@ -1,0 +1,55 @@
+---
+import "../../styles/global.css";
+import DotGrid from "../../components/DotGrid.astro";
+import HighlightSelection from "../../components/HighlightSelection.astro";
+import { getCollection, render } from "astro:content";
+import { getResourceTitle } from "../../lib/resources";
+
+export async function getStaticPaths() {
+    const entries = await getCollection("resources");
+    return entries.map((entry) => ({ params: { id: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const title = await getResourceTitle(entry);
+---
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+        <meta name="generator" content={Astro.generator} />
+        <title>{title} — !localhost</title>
+    </head>
+    <body>
+        <DotGrid>
+            <main class="mx-auto max-w-2xl px-6 py-16">
+                <a
+                    class="text-sm text-gray-600 underline underline-offset-2 hover:no-underline"
+                    href="/resources"
+                >
+                    ← Resources
+                </a>
+                <article class="resource mt-6 text-gray-800">
+                    <Content />
+                </article>
+            </main>
+        </DotGrid>
+        <HighlightSelection />
+    </body>
+</html>
+
+<style>
+    /* Minimal markdown styling; Tailwind preflight strips the defaults. */
+    .resource :global(h1) { font-size: 2.25rem; line-height: 1.2; margin-bottom: 1rem; }
+    .resource :global(h2) { font-size: 1.5rem; margin-top: 2rem; margin-bottom: 0.5rem; }
+    .resource :global(h3) { font-size: 1.125rem; font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.5rem; }
+    .resource :global(p) { margin-block: 0.75rem; }
+    .resource :global(ul) { list-style: disc; padding-left: 1.5rem; margin-block: 0.75rem; }
+    .resource :global(ol) { list-style: decimal; padding-left: 1.5rem; margin-block: 0.75rem; }
+    .resource :global(a) { text-decoration: underline; text-underline-offset: 2px; }
+    .resource :global(a:hover) { text-decoration: none; }
+    .resource :global(code) { font-size: 0.875em; }
+    .resource :global(pre) { padding: 1rem; margin-block: 1rem; border-radius: 0.375rem; overflow-x: auto; }
+</style>

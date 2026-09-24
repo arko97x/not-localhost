@@ -1,0 +1,59 @@
+---
+import "../../styles/global.css";
+import DotGrid from "../../components/DotGrid.astro";
+import HighlightSelection from "../../components/HighlightSelection.astro";
+import { getResources } from "../../lib/resources";
+
+const resources = await getResources();
+---
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+        <meta name="generator" content={Astro.generator} />
+        <title>Resources — !localhost</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Single+Day&display=swap"
+        />
+    </head>
+    <body>
+        <DotGrid>
+            <main class="mx-auto max-w-2xl px-6 py-16">
+                <h1
+                    class="text-5xl"
+                    style="font-family: 'Single Day', cursive;"
+                >
+                    Resources
+                </h1>
+                <p class="mt-1 text-sm text-gray-600">
+                    Guides and references for the course.
+                </p>
+
+                <ul class="mt-12 space-y-4 text-gray-800">
+                    {
+                        resources.map(({ entry, title }) => (
+                            <li>
+                                <a
+                                    class="underline underline-offset-2 hover:no-underline"
+                                    href={`/resources/${entry.id}`}
+                                >
+                                    {title}
+                                </a>
+                                {entry.data.description && (
+                                    <p class="text-sm text-gray-600">
+                                        {entry.data.description}
+                                    </p>
+                                )}
+                            </li>
+                        ))
+                    }
+                </ul>
+            </main>
+        </DotGrid>
+        <HighlightSelection />
+    </body>
+</html>
