@@ -1,0 +1,102 @@
+---
+---
+
+<script>
+	(function () {
+		const NEON = "204, 255, 0";
+		let marks: HTMLDivElement[] = [];
+		let seeds: Record<string, number>[] = [];
+		let rafId: number | null = null;
+
+		function rand(min: number, max: number) {
+			return min + Math.random() * (max - min);
+		}
+
+		function ensureSeed(i: number) {
+			if (!seeds[i]) {
+				seeds[i] = {
+					overshoot: rand(2, 6),
+					rotate: rand(-1.4, 1.4),
+					skew: rand(-1, 1),
+					r1: rand(2, 9),
+					r2: rand(2, 9),
+					r3: rand(2, 9),
+					r4: rand(2, 9),
+					alpha: rand(0.42, 0.6),
+					squeeze: rand(0.85, 0.95),
+					topOffset: rand(0.04, 0.12),
+					jitterY: rand(-1, 1),
+				};
+			}
+			return seeds[i];
+		}
+
+		function clearMarks() {
+			for (const m of marks) m.remove();
+			marks = [];
+			seeds = [];
+		}
+
+		function ensureMarkEl(i: number) {
+			if (marks[i]) return marks[i];
+			const el = document.createElement("div");
+			el.style.position = "absolute";
+			el.style.pointerEvents = "none";
+			el.style.mixBlendMode = "multiply";
+			el.style.zIndex = "2147483647";
+			document.body.appendChild(el);
+			marks[i] = el;
+			return el;
+		}
+
+		function render() {
+			rafId = null;
+			const sel = window.getSelection();
+			if (
+				!sel ||
+				sel.isCollapsed ||
+				sel.rangeCount === 0 ||
+				!sel.toString().trim()
+			) {
+				clearMarks();
+				return;
+			}
+
+			const range = sel.getRangeAt(0);
+			const rects = Array.from(range.getClientRects()).filter(
+				(r) => r.width > 2 && r.height > 2,
+			);
+
+			while (marks.length > rects.length) {
+				marks.pop()?.remove();
+			}
+			seeds.length = rects.length;
+
+			rects.forEach((rect, i) => {
+				const seed = ensureSeed(i);
+				const el = ensureMarkEl(i);
+				el.style.left = rect.left + window.scrollX - seed.overshoot / 2 + "px";
+				el.style.top =
+					rect.top +
+					window.scrollY +
+					rect.height * seed.topOffset +
+					seed.jitterY +
+					"px";
+				el.style.width = rect.width + seed.overshoot + "px";
+				el.style.height = rect.height * seed.squeeze + "px";
+				el.style.background = `rgba(${NEON}, ${seed.alpha})`;
+				el.style.borderRadius = `${seed.r1}px ${seed.r2}px ${seed.r3}px ${seed.r4}px`;
+				el.style.transform = `rotate(${seed.rotate}deg) skewX(${seed.skew}deg)`;
+			});
+		}
+
+		function schedule() {
+			if (rafId) return;
+			rafId = requestAnimationFrame(render);
+		}
+
+		document.addEventListener("selectionchange", schedule);
+		window.addEventListener("scroll", schedule, { passive: true });
+		window.addEventListener("resize", schedule);
+	})();
+</script>

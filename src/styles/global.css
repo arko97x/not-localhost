@@ -1,1 +1,11 @@
 @import "tailwindcss";
+
+/* The highlighter look is drawn by HighlightSelection.astro; keep the
+   native selection box invisible so it doesn't show through underneath. */
+::selection {
+	background-color: transparent;
+}
+
+::-moz-selection {
+	background-color: transparent;
+}
