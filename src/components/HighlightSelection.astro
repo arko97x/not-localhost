@@ -37,6 +37,45 @@
 			seeds = [];
 		}
 
+		// range.getClientRects() can include "phantom" full-width rects for
+		// empty block-level gaps when a selection spans multiple elements.
+		// Walking the actual text nodes and measuring only their intersection
+		// with the range avoids that.
+		function getTextRects(range: Range): DOMRect[] {
+			const rects: DOMRect[] = [];
+			const root =
+				range.commonAncestorContainer.nodeType === Node.TEXT_NODE
+					? range.commonAncestorContainer.parentNode
+					: range.commonAncestorContainer;
+			if (!root) return rects;
+
+			const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+				acceptNode(node) {
+					return range.intersectsNode(node)
+						? NodeFilter.FILTER_ACCEPT
+						: NodeFilter.FILTER_REJECT;
+				},
+			});
+
+			let node: Node | null;
+			while ((node = walker.nextNode())) {
+				const text = node.textContent ?? "";
+				let start = 0;
+				let end = text.length;
+				if (node === range.startContainer) start = range.startOffset;
+				if (node === range.endContainer) end = range.endOffset;
+				if (start >= end) continue;
+
+				const nodeRange = document.createRange();
+				nodeRange.setStart(node, start);
+				nodeRange.setEnd(node, end);
+				for (const r of nodeRange.getClientRects()) {
+					if (r.width > 1 && r.height > 1) rects.push(r);
+				}
+			}
+			return rects;
+		}
+
 		function ensureMarkEl(i: number) {
 			if (marks[i]) return marks[i];
 			const el = document.createElement("div");
@@ -63,9 +102,7 @@
 			}
 
 			const range = sel.getRangeAt(0);
-			const rects = Array.from(range.getClientRects()).filter(
-				(r) => r.width > 2 && r.height > 2,
-			);
+			const rects = getTextRects(range);
 
 			while (marks.length > rects.length) {
 				marks.pop()?.remove();
