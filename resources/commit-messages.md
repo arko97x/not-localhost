@@ -109,7 +109,10 @@ When asked to draft a commit message:
 4. Do not invent tests, issue numbers, motivations, or breaking changes.
 5. Prefer one precise subject. Add a body only when the reason is not obvious.
 6. Return only a proposed message; never run repository-changing commands.
-7. Never add AI attribution or generated-by trailers.
+7. Never add AI attribution or generated-by trailers. This includes
+   `Co-Authored-By:` lines naming an AI model or tool (for example
+   `Co-Authored-By: Claude ... <noreply@anthropic.com>`); remove any such
+   line a tool adds by default before suggesting the message.
 
 A useful prompt is:
 
@@ -117,7 +120,8 @@ A useful prompt is:
 Read `git diff --staged` and the recent commit history. Draft one Conventional
 Commit message for the staged change. Use an imperative subject of at most 50
 characters where practical. Add a body only if it explains non-obvious why.
-Do not invent context or claim checks that were not run. Do not stage, commit,
+Do not invent context or claim checks that were not run. Do not add
+Co-Authored-By or other AI attribution trailers. Do not stage, commit,
 amend, or push anything; return only the suggested message.
 ```
 
