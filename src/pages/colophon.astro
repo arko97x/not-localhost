@@ -1,21 +1,9 @@
 ---
-import "../styles/global.css";
-import Fonts from "../components/Fonts.astro";
-import DotGrid from "../components/DotGrid.astro";
-import HighlightSelection from "../components/HighlightSelection.astro";
+import SiteShell from "../components/SiteShell.astro";
 ---
 
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width" />
-        <meta name="generator" content={Astro.generator} />
-        <title>Colophon — !localhost</title>
-        <Fonts />
-    </head>
-    <body>
-        <DotGrid>
-            <main class="mx-auto max-w-2xl px-6 py-16">
+<SiteShell title="Colophon">
+            <div class="mx-auto max-w-2xl py-16">
                 <h1 class="font-heading text-5xl">Colophon</h1>
                 <p class="mt-1 text-base text-gray-600">
                     How this site is built, and who it borrows from.
@@ -162,8 +150,5 @@ import HighlightSelection from "../components/HighlightSelection.astro";
                         , during Sept–Oct 2026.
                     </p>
                 </section>
-            </main>
-        </DotGrid>
-        <HighlightSelection />
-    </body>
-</html>
+            </div>
+</SiteShell>

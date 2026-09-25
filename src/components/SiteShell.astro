@@ -1,0 +1,53 @@
+---
+import "../styles/global.css";
+import Fonts from "./Fonts.astro";
+import DotGrid from "./DotGrid.astro";
+import HighlightSelection from "./HighlightSelection.astro";
+
+interface Props {
+    title: string;
+    description?: string;
+}
+
+const { title, description = "A three-week course about making work for the public web." } = Astro.props;
+const nav = [
+    { href: "/", label: "Home" },
+    { href: "/today", label: "Today" },
+    { href: "/brief", label: "The brief" },
+    { href: "/resources", label: "Resources" },
+    { href: "/colophon", label: "Colophon" },
+];
+const path = Astro.url.pathname.replace(/\/$/, "") || "/";
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="generator" content={Astro.generator} />
+        <meta name="description" content={description} />
+        <title>{title} — !localhost</title>
+        <Fonts />
+    </head>
+    <body>
+        <DotGrid>
+            <div class="mx-auto max-w-5xl px-5 sm:px-8">
+                <header class="flex flex-wrap items-center justify-between gap-4 border-b border-gray-300 py-5">
+                    <a class="font-heading text-3xl leading-none" href="/" aria-label="!localhost home">!localhost</a>
+                    <nav aria-label="Main navigation" class="flex flex-wrap gap-x-5 gap-y-2 text-sm">
+                        {nav.map(({ href, label }) => (
+                            <a href={href} aria-current={path === href ? "page" : undefined} class:list={["nav-link", path === href && "nav-link-active"]}>{label}</a>
+                        ))}
+                    </nav>
+                </header>
+                <main id="main"><slot /></main>
+                <footer class="mt-20 flex flex-wrap justify-between gap-3 border-t border-gray-300 py-6 text-sm text-gray-600">
+                    <p>!localhost · SMI · Sept–Oct 2026</p>
+                    <p>Made in class, for the internet.</p>
+                </footer>
+            </div>
+        </DotGrid>
+        <HighlightSelection />
+    </body>
+</html>

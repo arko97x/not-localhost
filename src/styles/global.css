@@ -15,3 +15,9 @@
 ::-moz-selection {
 	background-color: transparent;
 }
+
+body { color: #202020; }
+a:focus-visible { outline: 2px solid #222; outline-offset: 4px; }
+.text-link, .nav-link { text-decoration: underline; text-underline-offset: 2px; }
+.text-link:hover, .nav-link:hover { text-decoration: none; }
+.nav-link-active { font-weight: 700; text-decoration: none; box-shadow: inset 0 -0.7em 0 #ccff00; }

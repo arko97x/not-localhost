@@ -1,8 +1,5 @@
 ---
-import "../../styles/global.css";
-import Fonts from "../../components/Fonts.astro";
-import DotGrid from "../../components/DotGrid.astro";
-import HighlightSelection from "../../components/HighlightSelection.astro";
+import SiteShell from "../../components/SiteShell.astro";
 import { getCollection, render } from "astro:content";
 import { getResourceTitle } from "../../lib/resources";
 
@@ -16,17 +13,8 @@ const { Content } = await render(entry);
 const title = await getResourceTitle(entry);
 ---
 
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width" />
-        <meta name="generator" content={Astro.generator} />
-        <title>{title} — !localhost</title>
-        <Fonts />
-    </head>
-    <body>
-        <DotGrid>
-            <main class="mx-auto max-w-2xl px-6 py-16">
+<SiteShell title={title}>
+            <div class="mx-auto max-w-2xl py-16">
                 <a
                     class="text-sm text-gray-600 underline underline-offset-2 hover:no-underline"
                     href="/resources"
@@ -36,11 +24,8 @@ const title = await getResourceTitle(entry);
                 <article class="resource mt-6 text-gray-800">
                     <Content />
                 </article>
-            </main>
-        </DotGrid>
-        <HighlightSelection />
-    </body>
-</html>
+            </div>
+</SiteShell>
 
 <style>
     /* Minimal markdown styling; Tailwind preflight strips the defaults. */
