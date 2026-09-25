@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import Fonts from "../components/Fonts.astro";
 import DotGrid from "../components/DotGrid.astro";
 import HighlightSelection from "../components/HighlightSelection.astro";
 ---
@@ -10,23 +11,13 @@ import HighlightSelection from "../components/HighlightSelection.astro";
         <meta name="viewport" content="width=device-width" />
         <meta name="generator" content={Astro.generator} />
         <title>Colophon — !localhost</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Single+Day&display=swap"
-        />
+        <Fonts />
     </head>
     <body>
         <DotGrid>
             <main class="mx-auto max-w-2xl px-6 py-16">
-                <h1
-                    class="text-5xl"
-                    style="font-family: 'Single Day', cursive;"
-                >
-                    Colophon
-                </h1>
-                <p class="mt-1 text-sm text-gray-600">
+                <h1 class="font-heading text-5xl">Colophon</h1>
+                <p class="mt-1 text-base text-gray-600">
                     How this site is built, and who it borrows from.
                 </p>
 
@@ -76,22 +67,32 @@ import HighlightSelection from "../components/HighlightSelection.astro";
                         <li>
                             <a
                                 class="underline underline-offset-2 hover:no-underline"
-                                href="https://fonts.google.com/specimen/Homemade+Apple"
+                                href="https://www.1001fonts.com/handmade-alphabet-font.html"
                                 target="_blank"
                             >
-                                Homemade Apple
+                                Handmade Alphabet
                             </a>{" "}
-                            (Google Fonts) — sticky note text
+                            by Keithzo
                         </li>
                         <li>
                             <a
                                 class="underline underline-offset-2 hover:no-underline"
-                                href="https://fonts.google.com/specimen/Single+Day"
+                                href="https://www.1001fonts.com/stampatello-faceto-font.html"
                                 target="_blank"
                             >
-                                Single Day
+                                Stampatello Faceto
                             </a>{" "}
-                            (Google Fonts) — this page's heading
+                            by UkiyoMoji
+                        </li>
+                        <li>
+                            <a
+                                class="underline underline-offset-2 hover:no-underline"
+                                href="https://www.1001fonts.com/gooddog-plain-font.html"
+                                target="_blank"
+                            >
+                                GoodDog Plain
+                            </a>{" "}
+                            by Fonthead Design
                         </li>
                     </ul>
                 </section>

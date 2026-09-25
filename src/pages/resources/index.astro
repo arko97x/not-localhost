@@ -1,5 +1,6 @@
 ---
 import "../../styles/global.css";
+import Fonts from "../../components/Fonts.astro";
 import DotGrid from "../../components/DotGrid.astro";
 import HighlightSelection from "../../components/HighlightSelection.astro";
 import { getResources } from "../../lib/resources";
@@ -13,23 +14,15 @@ const resources = await getResources();
         <meta name="viewport" content="width=device-width" />
         <meta name="generator" content={Astro.generator} />
         <title>Resources — !localhost</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Single+Day&display=swap"
-        />
+        <Fonts />
     </head>
     <body>
         <DotGrid>
             <main class="mx-auto max-w-2xl px-6 py-16">
-                <h1
-                    class="text-5xl"
-                    style="font-family: 'Single Day', cursive;"
-                >
+                <h1 class="font-heading text-5xl">
                     Resources
                 </h1>
-                <p class="mt-1 text-sm text-gray-600">
+                <p class="mt-1 text-base text-gray-600">
                     Guides and references for the course.
                 </p>
 

@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import Fonts from "../components/Fonts.astro";
 import DotGrid from "../components/DotGrid.astro";
 import PostIt from "../components/PostIt.astro";
 import HighlightSelection from "../components/HighlightSelection.astro";
@@ -11,12 +12,7 @@ import HighlightSelection from "../components/HighlightSelection.astro";
         <meta name="viewport" content="width=device-width" />
         <meta name="generator" content={Astro.generator} />
         <title>!localhost (SMI 2026)</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Homemade+Apple&display=swap"
-        />
+        <Fonts />
     </head>
     <body>
         <DotGrid>

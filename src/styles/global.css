@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+/* Font families are loaded by Fonts.astro; see astro.config.mjs. */
+@theme inline {
+	--font-sans: var(--font-stampatello-faceto);
+	--font-heading: var(--font-handmade-alphabet);
+}
+
 /* The highlighter look is drawn by HighlightSelection.astro; keep the
    native selection box invisible so it doesn't show through underneath. */
 ::selection {

@@ -1,0 +1,9 @@
+---
+// Loads the self-hosted font families configured in astro.config.mjs.
+// Render once inside each page's <head>.
+import { Font } from "astro:assets";
+---
+
+<Font cssVariable="--font-good-dog" preload />
+<Font cssVariable="--font-handmade-alphabet" preload />
+<Font cssVariable="--font-stampatello-faceto" preload />

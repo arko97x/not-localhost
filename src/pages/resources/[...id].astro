@@ -1,5 +1,6 @@
 ---
 import "../../styles/global.css";
+import Fonts from "../../components/Fonts.astro";
 import DotGrid from "../../components/DotGrid.astro";
 import HighlightSelection from "../../components/HighlightSelection.astro";
 import { getCollection, render } from "astro:content";
@@ -21,6 +22,7 @@ const title = await getResourceTitle(entry);
         <meta name="viewport" content="width=device-width" />
         <meta name="generator" content={Astro.generator} />
         <title>{title} — !localhost</title>
+        <Fonts />
     </head>
     <body>
         <DotGrid>
@@ -42,7 +44,7 @@ const title = await getResourceTitle(entry);
 
 <style>
     /* Minimal markdown styling; Tailwind preflight strips the defaults. */
-    .resource :global(h1) { font-size: 2.25rem; line-height: 1.2; margin-bottom: 1rem; }
+    .resource :global(h1) { font-family: var(--font-handmade-alphabet); font-size: 2.25rem; line-height: 1.2; margin-bottom: 1rem; }
     .resource :global(h2) { font-size: 1.5rem; margin-top: 2rem; margin-bottom: 0.5rem; }
     .resource :global(h3) { font-size: 1.125rem; font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.5rem; }
     .resource :global(p) { margin-block: 0.75rem; }
